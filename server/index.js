@@ -14,8 +14,7 @@ const TOP_LEVEL_OAUTH_COOKIE = "shopify_top_level_oauth";
 const PORT = parseInt(process.env.PORT || "8081", 10);
 const isTest = process.env.NODE_ENV === "test" || !!process.env.VITE_TEST_BUILD;
 
-const SCOPES =
-  ["write_products","write_customers","write_draft_orders","write_orders","read_checkouts","read_product_listings","read_inventory","read_fulfillments","read_assigned_fulfillment_orders"];
+const SCOPES = ["write_products","write_customers","write_draft_orders","write_orders","read_checkouts","read_product_listings","read_inventory","read_fulfillments","read_assigned_fulfillment_orders"];
 
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
