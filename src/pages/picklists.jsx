@@ -1,12 +1,6 @@
-import React from 'react';
-import { Page } from '@shopify/polaris';
+import React from "react";
+import { Page } from "@shopify/polaris";
 
-export function Picklists() {
-  return (
-    <Page
-    fullWidth
-    title="Picklists"
-    >
-    </Page>
-  )
+export default function Picklists() {
+  return <Page title="Picklists"></Page>;
 }

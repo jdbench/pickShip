@@ -13,10 +13,12 @@ import { Redirect } from "@shopify/app-bridge/actions";
 import { AppProvider as PolarisProvider } from "@shopify/polaris";
 import translations from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/build/esm/styles.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NavigationMenu } from "@shopify/app-bridge-react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Nav from "./components/Nav";
+import Routes from "./Routes";
 
-import { Home, Locations, NotFound, Picklists, Products } from "./pages";
+const pages = import.meta.globEager("./pages/**/!(*.test.[jt]sx)*.([jt]sx)");
 
 export default function App() {
   return (
@@ -30,14 +32,28 @@ export default function App() {
       >
         <MyProvider>
           <Router>
+            <NavigationMenu
+              navigationLinks={[
+                {
+                  label: "Dashboard",
+                  destination: "/",
+                },
+                {
+                  label: "Locations",
+                  destination: "/locations",
+                },
+                {
+                  label: "Products",
+                  destination: "/products",
+                },
+                {
+                  label: "Picklists",
+                  destination: "/picklists",
+                },
+              ]}
+            />
             <Nav />
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/404" element={<NotFound />} />
-              <Route exact path="/locations" element={<Locations />} />
-              <Route exact path="/picklists" element={<Picklists />} />
-              <Route exact path="/Products" element={<Products />} />
-            </Routes>
+            <Routes pages={pages} />
           </Router>
         </MyProvider>
       </AppBridgeProvider>

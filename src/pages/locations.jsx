@@ -1,12 +1,6 @@
-import React from 'react';
-import { Page } from '@shopify/polaris';
+import React from "react";
+import { Page } from "@shopify/polaris";
 
-export function Locations() {
-  return (
-    <Page
-    fullWidth
-    title="Locations"
-    >
-    </Page>
-  )
+export default function Locations() {
+  return <Page title="Locations"></Page>;
 }

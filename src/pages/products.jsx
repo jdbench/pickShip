@@ -1,13 +1,11 @@
-import React from 'react';
-import Product from '../components/Products';
-import { Page } from '@shopify/polaris';
+import React from "react";
+import Product from "../components/Products";
+import { Page } from "@shopify/polaris";
 
-export function Products() {
+export default function Products() {
   return (
-    <Page
-    title="Products"
-    >
-        <Product />
+    <Page title="Products">
+      <Product />
     </Page>
-  )
+  );
 }

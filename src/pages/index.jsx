@@ -1,5 +1,11 @@
-export {Home} from './home.jsx';
-export {Locations} from './locations.jsx';
-export {NotFound} from './notFound.jsx';
-export {Picklists} from './picklists.jsx';
-export {Products} from './products.jsx';
+import React from "react";
+import Products from "../components/Products";
+import { Page } from "@shopify/polaris";
+
+export default function Home() {
+  return (
+    <Page title="Dashboard">
+      <Products />
+    </Page>
+  );
+}

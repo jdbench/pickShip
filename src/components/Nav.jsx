@@ -1,9 +1,20 @@
 import React, { useState, useCallback } from "react";
 import { NavLink as Link } from "react-router-dom";
-import { TextField } from "@shopify/polaris";
+import { TextField, Icon } from "@shopify/polaris";
+import { navData } from "./navData";
+import {
+  MobileHamburgerMajor,
+  MobileCancelMajor,
+} from "@shopify/polaris-icons";
+import css from "./nav.css";
 
 export default function Nav() {
   const [isHover, setIsHover] = useState(false);
+  const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -13,67 +24,44 @@ export default function Nav() {
     setIsHover(false);
   };
 
-  let activeStyle = {
-    textDecoration: "none",
-    background: "var(--p-action-primary)",
-    color: "#ffffff",
-    padding: "15px 45px",
+  const onMouseEnter = () => {
+    if (window.innerWidth > 650) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
   };
-
-  let inactiveStyle = {
-    textDecoration: "none",
-    color: "black",
-    padding: "15px 45px",
-    flex: "auto",
-  };
-
-  let hoverStyle = {
-    backgroundColor: isHover ? "var(--p-action-primary-hover)" : "lightgray",
+  const onMouseLeave = () => {
+    if (window.innerWidth < 650) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
   };
 
   return (
-    <nav>
-      <ul
-        style={{
-          listStyle: "none",
-          display: "flex",
-          justifyContent: "space-around",
-          padding: "0px 0px 0px 0px",
-        }}
-      >
-        <li style={{ flex: "1" }}>
-          <Link
-            to={"/"}
-            style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={"/products"}
-            style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
-          >
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={"/locations"}
-            style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
-          >
-            Locations
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={"/picklists"}
-            style={({ isActive }) => (isActive ? activeStyle : inactiveStyle)}
-          >
-            Picklists
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav>
+        <div className="hamburger" onClick={handleClick}>
+          <Icon source={click ? MobileCancelMajor : MobileHamburgerMajor} />
+        </div>
+        <ul className={click ? "nav-menu-active" : "nav-menu"}>
+          {navData.map((item, index) => {
+            return (
+              <li key={index}>
+                <Link
+                  onClick={closeMobileMenu}
+                  to={item.url}
+                  style={item.style}
+                  className={item.className}
+                >
+                  {item.title}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }
