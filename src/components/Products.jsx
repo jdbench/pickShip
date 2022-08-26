@@ -7,12 +7,14 @@ import {
   Banner,
   Page,
   Layout,
+  Stack,
 } from "@shopify/polaris";
 import Product from "./Product";
 import createProduct from "./createProduct";
 import { productQuery } from "./productQuery";
 import noImage from "../assets/no-image.jpg";
 import { ProductStatus } from "@shopify/app-bridge/actions/ResourcePicker";
+import css from "./products.css";
 
 let products = [];
 
@@ -73,17 +75,19 @@ export default function Products() {
     });
   }
   return (
-    <Page>
-      {retval}
-      <Pagination
-        label="Pages"
-        hasPrevious={hasPrevious}
-        onPrevious={() => previousPage(prevCursor)}
-        previousTooltip="Previous Page"
-        nextTooltip="Next Page"
-        hasNext={hasNext}
-        onNext={() => nextPage(nextCursor)}
-      />
-    </Page>
+    <>
+      <Stack distribution="fillEvenly">{retval}</Stack>
+      <div className="pagination">
+        <Pagination
+          label="Pages"
+          hasPrevious={hasPrevious}
+          onPrevious={() => previousPage(prevCursor)}
+          previousTooltip="Previous Page"
+          nextTooltip="Next Page"
+          hasNext={hasNext}
+          onNext={() => nextPage(nextCursor)}
+        />
+      </div>
+    </>
   );
 }

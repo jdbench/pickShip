@@ -23,6 +23,7 @@ export const productQuery = gql`
             edges {
               node {
                 displayName
+                barcode
                 id
                 sku
                 image {

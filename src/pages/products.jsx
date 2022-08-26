@@ -4,7 +4,7 @@ import { Page } from "@shopify/polaris";
 
 export default function Products() {
   return (
-    <Page title="Products">
+    <Page fullWidth title="Products">
       <Product />
     </Page>
   );

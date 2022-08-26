@@ -45,7 +45,7 @@ export default function Nav() {
         <div className="hamburger" onClick={handleClick}>
           <Icon source={click ? MobileCancelMajor : MobileHamburgerMajor} />
         </div>
-        <ul className={click ? "nav-menu-active" : "nav-menu"}>
+        <ul className={click ? "nav-menu show-nav-menu" : "nav-menu"}>
           {navData.map((item, index) => {
             return (
               <li key={index}>
